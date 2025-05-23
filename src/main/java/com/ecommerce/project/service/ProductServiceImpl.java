@@ -125,6 +125,7 @@ public class ProductServiceImpl implements ProductService{
         //was not saving it earlier i.e. new product
         Product savedProduct = productRepository.save(productfromDb);
 
+        //update category
         return modelMapper.map(savedProduct,ProductDTO.class);
 
     }
