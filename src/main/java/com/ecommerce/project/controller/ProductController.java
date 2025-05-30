@@ -1,8 +1,10 @@
 package com.ecommerce.project.controller;
 
+
 import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.payload.ProductResponse;
 import com.ecommerce.project.service.ProductService;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,11 +37,14 @@ public class ProductController {
     }
 
 
-    @PutMapping("/admin/product/{productId}")
-    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO,
-                                                    @PathVariable Long productId)
+
+
+    @PutMapping("/admin/products/{productId}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long productId,@RequestBody ProductDTO productDTO
+                                                    )
     {
         ProductDTO updateproductDTO = productService.updateProduct(productId,productDTO);
+
         return new ResponseEntity<>(updateproductDTO,HttpStatus.OK);
     }
 
@@ -47,7 +52,7 @@ public class ProductController {
 
 
 
-    //DTO for single product response for list of products
+
     @GetMapping("/public/categories/{categoryId}/products")
     public ResponseEntity<ProductResponse> getProductsByCategory(@PathVariable Long categoryId)
     {

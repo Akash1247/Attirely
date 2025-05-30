@@ -35,7 +35,6 @@ public class ProductServiceImpl implements ProductService{
 
         product.setImage("default.png");
         product.setCategory(category);
-        product.setDescription(product.getDescription());
         double specialPrice = product.getPrice() -
                 (product.getDiscount() * 0.01) * product.getPrice();
         product.setSpecialPrice(specialPrice);
@@ -106,27 +105,11 @@ public class ProductServiceImpl implements ProductService{
 
 
     @Override
-    public ProductDTO updateProduct(Long productId, ProductDTO productDTO)
     {
-        Product productfromDb = productRepository.findById(productId)
-                .orElseThrow( () -> new ResourceNotFoundException("Product","productId",productId));
 
         Product product = modelMapper.map(productDTO, Product.class);
 
 
-        // was using product to naya ban jaa rhaa thaa.
-        productfromDb.setProductName(product.getProductName());
-        productfromDb.setDescription(product.getDescription());
-        productfromDb.setQuantity(product.getQuantity());
-        productfromDb.setDiscount(product.getDiscount());
-        productfromDb.setPrice(product.getPrice());
-        productfromDb.setSpecialPrice(product.getSpecialPrice());
-
-        //was not saving it earlier i.e. new product
-        Product savedProduct = productRepository.save(productfromDb);
-
-        //update category
-        return modelMapper.map(savedProduct,ProductDTO.class);
 
     }
 
